@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,10 @@ import com.ipartek.formacion.dbms.persistence.Curso;
 @Repository("restauranteDaoImp")
 public class CursoDAOImp implements CursoDAO {
 
+	
+	//private Logger logger = LoggerFactory.getLogger(CursoDAOImp.class);
+	private Logger logger = LoggerFactory.getLogger(CursoDAOImp.class);
+	
 	@Autowired
 	@Qualifier("mysqlDataSource")
 	private DataSource dataSource;
@@ -33,7 +39,7 @@ public class CursoDAOImp implements CursoDAO {
 	
 	@Override
 	public Curso create(Curso curso) {
-		// TODO Auto-generated method stub
+		logger.info("METHOD DAO: getAll() -- PARAMS: " + curso.toString());
 		return null;
 	}
 
