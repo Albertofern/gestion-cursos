@@ -11,6 +11,11 @@ import java.io.Serializable;
  */
 public class Curso implements Comparable<Curso>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7762540983446312687L;
+
 	public static final int CODIGO_NULO = -1;
 	
 	private int codigo;
