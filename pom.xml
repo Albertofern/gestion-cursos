@@ -111,6 +111,13 @@
 			    <artifactId>mysql-connector-java</artifactId>
 			    <version>${mysql.version}</version>
 		</dependency>
+		
+			<!-- JDBC --> <!-- Paquete de Spring para acceso a BBDD -->
+		<dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-jdbc</artifactId>
+             <version>${org.springframework-version}</version>
+        </dependency>
 
 	</dependencies>
 	
