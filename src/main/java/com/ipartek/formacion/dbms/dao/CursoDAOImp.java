@@ -20,7 +20,7 @@ import com.ipartek.formacion.dbms.persistence.Curso;
  * @author Alberto
  *
  */
-@Repository("restauranteDaoImp")
+@Repository("cursoDaoImp")
 public class CursoDAOImp implements CursoDAO {
 
 	
