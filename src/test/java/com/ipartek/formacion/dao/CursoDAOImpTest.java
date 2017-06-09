@@ -50,7 +50,7 @@ public class CursoDAOImpTest {
 	public void setUp() throws Exception {
 		curso = new Curso();
 		curso.setNomcurso("HTML5");
-		curso.setCodigo(800);
+		curso.setCodigo(1498);
 		
 		codigos= new int[4];
 		codigos[0]= 0;
@@ -91,7 +91,7 @@ public class CursoDAOImpTest {
 	@Test(timeout = 600)
 	public void testGetAll() {
 		List<Curso> cursos = cS.getAll();
-		int size = 7;
+		int size = 1498;
 		assertEquals("numero de cursos incorrecto",size , cursos.size());		
 	}
 
