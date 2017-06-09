@@ -23,7 +23,7 @@ public interface CursoService {
 
 	public void delete(int codigo);
 	
-	public Curso getByNombre(String nombre);
+	public Curso getByNombre(String nomcurso);
 	
 
 }
