@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2017 a las 17:50:35
+-- Tiempo de generación: 09-06-2017 a las 09:50:14
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -19,6 +19,51 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gestioncursos`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoCreate` (IN `pnomcurso` VARCHAR(100), IN `pcodcurso` VARCHAR(50), OUT `pcodigo` INT)  NO SQL
+BEGIN
+INSERT	INTO curso(nomcurso,codcurso)
+VALUES(LOWER(pnomcurso),LOWER(pcodcurso));
+SET pcodigo = LAST_INSERT_ID();
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoDelete` (IN `pcodigo` INT)  NO SQL
+BEGIN
+
+DELETE FROM curso WHERE codigo = pcodigo;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetAll` ()  NO SQL
+BEGIN
+SELECT c.codigo, c.nomcurso, c.codcurso
+FROM curso as c;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetById` (IN `pcodigo` INT)  NO SQL
+BEGIN
+SELECT  c.codigo, c.nomcurso, c.codcurso
+FROM curso as c 
+WHERE c.codigo = pcodigo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetByNombre` (IN `pnomcurso` VARCHAR(100))  NO SQL
+BEGIN
+    SELECT `codigo`, `nomcurso`, `codcurso`
+    FROM `curso`
+    WHERE nomcurso = pnomcurso;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoUpdate` (IN `pcodigo` INT, IN `pnomcurso` VARCHAR(100), IN `pcodcurso` VARCHAR(50))  NO SQL
+UPDATE curso 
+SET nomcurso = LOWER(pnomcurso),codcurso=LOWER(pcodcurso)
+WHERE codigo = pcodigo$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1554,7 +1599,7 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de la tabla `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT COMMENT 'el campo clave de la tabla. Es auto generado.', AUTO_INCREMENT=2028;
+  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT COMMENT 'el campo clave de la tabla. Es auto generado.', AUTO_INCREMENT=1686;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

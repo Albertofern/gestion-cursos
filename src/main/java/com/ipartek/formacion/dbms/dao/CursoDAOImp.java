@@ -49,7 +49,7 @@ public class CursoDAOImp implements CursoDAO {
 	
 	@Override
 	public Curso create(Curso curso) {
-		final String SQL = "barrioCreate";
+		final String SQL = "cursoCreate";
 		this.jdbcCall = new SimpleJdbcCall(dataSource);
 		jdbcCall.withProcedureName(SQL);
 		SqlParameterSource in = new MapSqlParameterSource()
