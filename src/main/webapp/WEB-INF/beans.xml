@@ -15,6 +15,16 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:/database/database.properties" />
 	</bean>
+	
+	<bean id="misCostantes"
+    	class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="locations">
+	    <list>
+	      <value>classpath*:constantes/costantes.properties</value>
+	    </list>
+	  </property>
+	</bean>
+
 	<bean name="mysqlDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${mysql.driver}" />
