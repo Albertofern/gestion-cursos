@@ -8,12 +8,17 @@
     
     
     <http auto-config="true">
-        <intercept-url pattern="/admin*" access="ROLE_USER" />
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        		<form-login  login-page="/admin"
+                    username-parameter="userId"
+                    password-parameter="password"
+                    authentication-failure-url="/Access_Denied"
+                    />
     </http>
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
             <user-service>
-                <user authorities="ROLE_USER" name="admin" password="2017#admin" />
+                <user authorities="ROLE_ADMIN" name="admin" password="2017#admin" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
