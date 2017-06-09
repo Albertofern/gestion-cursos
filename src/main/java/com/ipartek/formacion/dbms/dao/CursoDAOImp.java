@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.dbms.dao.interfaces.CursoDAO;
+import com.ipartek.formacion.dbms.mappers.CursoMapper;
 import com.ipartek.formacion.dbms.persistence.Curso;
 
 /**
@@ -62,32 +64,71 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public List<Curso> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL = "CALL cursogetAll";
+		List<Curso> cursos = null;
+		try {
+			cursos = jdbctemplate.query(SQL, new CursoMapper());
+			logger.info("METHOD DAO: getAll() -- LIST SIZE: " + String.valueOf(cursos.size()));
+		} catch (EmptyResultDataAccessException e) {
+			logger.trace("NO DATA:  " + e.getMessage() + " " + SQL);
+		}
+		return cursos;
 	}
 
 	@Override
 	public Curso getById(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		Curso curso = null;
+		final String SQL = "CALL cursogetById(?)";
+		try {
+			curso = jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[] { codigo });
+			logger.info("METHOD DAO: getById() -- PARAMS:  " + curso.toString());
+		} catch (EmptyResultDataAccessException e) {
+			curso = null;
+			logger.info("NO DATA:  " + codigo + " " + e.getMessage());
+		}
+		return curso;
 	}
 
 	@Override
 	public Curso update(Curso curso) {
-		// TODO Auto-generated method stub
-		return null;
+		final String SQL = "cursoUpdate";
+
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		jdbcCall.withProcedureName(SQL);
+		SqlParameterSource in = new MapSqlParameterSource()
+				.addValue("pcodigo", curso.getCodigo())
+				.addValue("pnomcurso", curso.getNomcurso())
+				.addValue("pcodcurso", curso.getCodcurso());
+
+		logger.info("METHOD DAO: update() -- PARAMS:  " + curso.toString());
+		jdbcCall.execute(in);
+
+		return curso;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		// TODO Auto-generated method stub
+		String SQL = "cursoDelete";
+		this.jdbcCall = new SimpleJdbcCall(dataSource);
+		jdbcCall.withProcedureName(SQL);
+		SqlParameterSource in = new MapSqlParameterSource().addValue("pcodigo", codigo);
+		logger.info("METHOD DAO: delete()");
+		jdbcCall.execute(in);
 		
 	}
 
 	@Override
-	public Curso getByNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
+	public Curso getByNombre(String nomcurso) {
+		Curso curso = null;
+		final String SQL = "CALL barriogetByNombre(?)";
+		try {
+			curso = jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[] { nomcurso });
+			logger.info("METHOD DAO: getByNombre() -- PARAMS:  " + curso.toString());
+		} catch (EmptyResultDataAccessException e) {
+			curso = null;
+			logger.info("NO DATA:  " + nomcurso + " " + e.getMessage());
+		}
+		return curso;
 	}
 
 }
