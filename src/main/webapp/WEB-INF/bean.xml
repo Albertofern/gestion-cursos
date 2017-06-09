@@ -7,6 +7,10 @@
     					http://www.springframework.org/schema/jee/spring-jee.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	
+	
+	
 	<bean id="databaseProperties"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:/database/database.properties" />
