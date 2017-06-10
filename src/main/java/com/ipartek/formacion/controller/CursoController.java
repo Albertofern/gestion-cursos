@@ -42,7 +42,7 @@ import com.ipartek.formacion.dbms.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
 @Controller
-@RequestMapping(value = "/cursos")
+@RequestMapping(value="/cursos")
 public class CursoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
@@ -68,7 +68,7 @@ public class CursoController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
 		logger.info("METHOD CONTROLLER: getAll()");
-		mav = new ModelAndView("cursos/cursos");
+		mav = new ModelAndView("cursos");
 		List<Curso> cursos = cS.getAll();
 		mav.addObject("listadocursos", cursos);
 		return mav;
@@ -77,7 +77,7 @@ public class CursoController {
 	@RequestMapping(value="/{codigo}")
 	public ModelAndView getById(@PathVariable("codigo") int codigo){
 		logger.info("METHOD CONTROLLER: getById() -- PARAMS:  " + String.valueOf(codigo));
-		mav= new ModelAndView("cursos/curso");
+		mav= new ModelAndView("curso");
 		mav.addObject("curso",cS.getById(codigo));
 		return mav;
 	}
@@ -93,7 +93,7 @@ public class CursoController {
 	public String addCurso(Model model){
 		logger.info("METHOD CONTROLLER: addCurso() -- PARAM:  new");
 		model.addAttribute("curso", new Curso());
-		return "cursos/curso";
+		return "curso";
 	}
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
@@ -105,7 +105,7 @@ public class CursoController {
 		String txt="";
 		if (bindingResult.hasErrors()) {
 			logger.info("METHOD CONTROLLER: saveCurso() -- ERRORS: " + bindingResult.hasErrors());
-			destino = "cursos/curso";
+			destino = "curso";
 			txt = "Los datos de formulario contienen errores";
 		}else{
 			destino = "redirect:/cursos";
