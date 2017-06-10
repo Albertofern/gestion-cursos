@@ -7,7 +7,7 @@ package com.ipartek.formacion.controller;
  * @author Alberto Fernandez
  *
  */
-import java.io.File;
+
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
@@ -55,7 +55,7 @@ public class CursoController {
 	private CursoService cS;
 	
 	@Resource(name = "cursoValidator") // == @Autowired@Qualifier("cursoValidator")
-	CursoValidator validator;
+	CursoValidator validator = null;
 	
 	@InitBinder("curso")
 	public void initBinder(WebDataBinder binder, Locale locale) {
@@ -68,32 +68,32 @@ public class CursoController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getAll(){
 		logger.info("METHOD CONTROLLER: getAll()");
-		mav= new ModelAndView("cursos");
+		mav = new ModelAndView("cursos/cursos");
 		List<Curso> cursos = cS.getAll();
 		mav.addObject("listadocursos", cursos);
 		return mav;
 	}
 	
-	@RequestMapping(value="/{id}")
-	public ModelAndView getById(@PathVariable("id") int id){
-		logger.info("METHOD CONTROLLER: getById() -- PARAMS:  " + String.valueOf(id));
-		mav= new ModelAndView("curso");
-		mav.addObject("curso",cS.getById(id));
+	@RequestMapping(value="/{codigo}")
+	public ModelAndView getById(@PathVariable("codigo") int codigo){
+		logger.info("METHOD CONTROLLER: getById() -- PARAMS:  " + String.valueOf(codigo));
+		mav= new ModelAndView("cursos/curso");
+		mav.addObject("curso",cS.getById(codigo));
 		return mav;
 	}
 	
-	@RequestMapping(value="/deleteCurso/{id}")
-	public String delete(@PathVariable("id") int id, Model model){
+	@RequestMapping(value="/deleteCurso/{codigo}")
+	public String delete(@PathVariable("codigo") int codigo, Model model){
 		logger.info("METHOD CONTROLLER: deleteBarrio()");
-		cS.delete(id);
-		return "redirect:/barrios";
+		cS.delete(codigo);
+		return "redirect:/cursos";
 	}
 	
 	@RequestMapping(value="/addCurso")
 	public String addCurso(Model model){
 		logger.info("METHOD CONTROLLER: addCurso() -- PARAM:  new");
 		model.addAttribute("curso", new Curso());
-		return "curso";
+		return "cursos/curso";
 	}
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
@@ -105,7 +105,7 @@ public class CursoController {
 		String txt="";
 		if (bindingResult.hasErrors()) {
 			logger.info("METHOD CONTROLLER: saveCurso() -- ERRORS: " + bindingResult.hasErrors());
-			destino = "curso";
+			destino = "cursos/curso";
 			txt = "Los datos de formulario contienen errores";
 		}else{
 			destino = "redirect:/cursos";
