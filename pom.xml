@@ -17,6 +17,7 @@
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 		<javax.validation.version>1.0.0.GA</javax.validation.version>
 		<apachetiles.version>3.0.5</apachetiles.version>
+		<cxf.version>3.1.6</cxf.version>
 		
 	</properties>
 
@@ -154,12 +155,6 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${org.springsecurity-version}</version>
         </dependency>
-        	<!-- Spring Security TAG-LIBS -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${org.springsecurity-version}</version>
-        </dependency>
         	<!-- Hibernate JSR303 validator -->
 		<dependency>
         	<groupId>org.hibernate</groupId>
@@ -193,6 +188,31 @@
             <artifactId>tiles-jsp</artifactId>
             <version>${apachetiles.version}</version>
         </dependency>
+        	<!-- APACHE CXF -->
+         <dependency>
+              <groupId>org.apache.cxf</groupId>
+              <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+              <version>${cxf.version}</version>
+              <scope>provided</scope>
+         </dependency>
+          <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        	<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency> 
 
 
 	</dependencies>
