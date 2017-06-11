@@ -42,6 +42,7 @@ public class CursoDAOImp implements CursoDAO {
 	
 	@Autowired
 	@Qualifier("mysqlDataSource")
+	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbctemplate = new JdbcTemplate(dataSource);
@@ -120,7 +121,7 @@ public class CursoDAOImp implements CursoDAO {
 	@Override
 	public Curso getByNombre(String nomcurso) {
 		Curso curso = null;
-		final String SQL = "CALL barriogetByNombre(?)";
+		final String SQL = "CALL cursogetByNombre(?)";
 		try {
 			curso = jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[] { nomcurso });
 			logger.info("METHOD DAO: getByNombre() -- PARAMS:  " + curso.toString());

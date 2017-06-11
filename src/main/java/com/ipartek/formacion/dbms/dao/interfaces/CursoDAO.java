@@ -12,7 +12,7 @@ import com.ipartek.formacion.dbms.persistence.Curso;
  * @author Alberto
  *
  */
-public interface CursoDAO {
+public interface CursoDAO extends DAOSetter {
 	
 	public Curso create(Curso curso);
 
