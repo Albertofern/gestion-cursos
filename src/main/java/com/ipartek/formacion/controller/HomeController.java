@@ -33,66 +33,65 @@ import com.ipartek.formacion.service.interfaces.CursoService;
  */
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value="/")
 public class HomeController {
 
 	@Autowired
 	private CursoService cS;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
+
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
+
 		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
-		 
+		model.addAttribute("serverTime", formattedDate);
+
 		ArrayList<Curso> cursos = (ArrayList<Curso>) cS.getAll();
 		model.addAttribute("cursos", cursos);
-		
+
 		return "home";
-	}	
-	
-	@RequestMapping(value= "login.html")
-		public String loginPage(){
-			return "login";
 	}
-	
-	@RequestMapping(value= "/Access_Denied")
-		public String accesoDenegado(ModelMap model){
-			model.addAttribute("model", getPrincipal());
-			return "login";
-		}
+
+	@RequestMapping(value="login.html")
+	public String loginPage() {
+		return "login";
+	}
+
+	@RequestMapping(value="/Access_Denied")
+	public String accesoDenegado(ModelMap model) {
+		model.addAttribute("model", getPrincipal());
+		return "login";
+	}
 
 	private Object getPrincipal() {
 		String username = null;
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
-			if (principal instanceof UserDetails){
-				username = ((UserDetails) principal).getUsername();
-			}else{
-				username = principal.toString();
-			}
-			
-			return username;
-	}
-	
-	@RequestMapping(value="logout")
-		public String logout(HttpServletRequest request, HttpServletResponse response){
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			
-			if(auth != null){
-				new SecurityContextLogoutHandler().logout(request, response, auth);
-			}
-			
-			return "redirect:/login.html?logout";//se recomienda que la web logout sea la de login
-			
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
 		}
-	
-	
-	
+
+		return username;
+	}
+
+	@RequestMapping(value="logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+
+		return "redirect:/login.html?logout";// se recomienda que la web logout
+												// sea la de login
+
+	}
+
 }

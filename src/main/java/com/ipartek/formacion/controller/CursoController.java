@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 
@@ -49,15 +48,12 @@ public class CursoController {
 	ModelAndView mav = null;
 	
 	@Autowired
-	private ServletContext servletContext;
-	
-	@Autowired
 	private CursoService cS;
 	
 	@Resource(name = "cursoValidator") // == @Autowired@Qualifier("cursoValidator")
 	CursoValidator validator = null;
 	
-	@InitBinder("curso")
+	@InitBinder
 	public void initBinder(WebDataBinder binder, Locale locale) {
 		binder.setValidator(validator);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

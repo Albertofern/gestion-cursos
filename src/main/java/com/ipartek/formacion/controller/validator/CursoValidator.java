@@ -49,18 +49,18 @@ public class CursoValidator implements Validator{
 		}
 		
 		if (curs.getNomcurso().length() < nombreTamMin || curs.getNomcurso().length() > nombreTamMax) {
-			errors.rejectValue("nombre", "form.longitudNombreIncorrecta", new Object[] { nombreTamMin,nombreTamMax },
+			errors.rejectValue("nomcurso", "form.longitudNombreIncorrecta", new Object[] { nombreTamMin,nombreTamMax },
 						"El nombre tiene que ocupar entre 3 y 100 caracteres.");
 		}
 		
 		if (curs.getCodcurso().length() < codigoTamMin || curs.getCodcurso().length() > codigoTamMax) {
-			errors.rejectValue("codigo", "form.longitudNombreIncorrecta", new Object[] { codigoTamMin,codigoTamMax },
+			errors.rejectValue("codcurso", "form.longitudNombreIncorrecta", new Object[] { codigoTamMin,codigoTamMax },
 						"El codigo tiene que ocupar entre 3 y 50 caracteres.");
 		}
 		
 
 		if (curs.getCodigo() == Curso.CODIGO_NULO && cS.getByNombre(curs.getNomcurso()) != null) {
-			errors.rejectValue("nombre", "form.barrio.nombreExiste", new Object[] { curs.getNomcurso() },
+			errors.rejectValue("nomcurso", "form.barrio.nombreExiste", new Object[] { curs.getNomcurso() },
 					"el barrio ya existe en la base de datos");
 
 		}
