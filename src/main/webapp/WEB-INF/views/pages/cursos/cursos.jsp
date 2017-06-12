@@ -2,9 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-	<section class="row">
+	<section class="row col-lg-offset-3">
 	
-		<!--  <header class="col-xs-12"><h2 class="text-center text-capitalize"><spring:message code="cursos.titulo"/></h2></header> -->
+		<header class="col-xs-12">
+			<h2 class="text-center text-capitalize text-capitalize">
+				<spring:message code="cursos.titulo"/>
+			</h2>
+			</header> 
 		<div class="container">	
 			<div class="col-xs-1 col-md-2 text-capitalize">
 				<a class="btn btn-info text-center text-capitalize" 
