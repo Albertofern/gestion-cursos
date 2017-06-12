@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%><!--  -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
-	<section class="row">
+			<section class="row">
 				<div class="col-xs-12  col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3 jumbotron">
 					<div class="row">
 						<header class="col-xs-12  col-md-10 col-md-offset-1  col-lg-6 col-lg-offset-3 text-center page-header"><h3><spring:message code="curso.form"/></h3></header>
@@ -37,7 +37,7 @@
 						<button type="submit"  class="btn btn-success" ><span class="glyphicon glyphicon-ok"></span> ${men}</button>
 					</form:form>
 				</div>
-</section>
+			</section>
 
 
 
