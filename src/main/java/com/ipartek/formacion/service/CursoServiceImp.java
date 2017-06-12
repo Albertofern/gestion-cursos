@@ -53,8 +53,9 @@ public class CursoServiceImp implements CursoService{
 	}
 
 	@Override
-	public Curso getByNombre(String nomcurso) {
-		return cursoDao.getByNombre(nomcurso);
+	public List<Curso> getAllLimit() {
+		
+		return cursoDao.getAllLimit();
 	}
 
 }

@@ -118,18 +118,18 @@ public class CursoDAOImp implements CursoDAO {
 		
 	}
 
+
 	@Override
-	public Curso getByNombre(String nomcurso) {
-		Curso curso = null;
-		final String SQL = "CALL cursogetByNombre(?)";
+	public List<Curso> getAllLimit() {
+		final String SQL = "CALL cursogetAllLimit";
+		List<Curso> cursos = null;
 		try {
-			curso = jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[] { nomcurso });
-			logger.info("METHOD DAO: getByNombre() -- PARAMS:  " + curso.toString());
+			cursos = jdbctemplate.query(SQL, new CursoMapper());
+			logger.info("METHOD DAO: getAllLimit() -- LIST SIZE: " + String.valueOf(cursos.size()));
 		} catch (EmptyResultDataAccessException e) {
-			curso = null;
-			logger.info("NO DATA:  " + nomcurso + " " + e.getMessage());
+			logger.trace("NO DATA:  " + e.getMessage() + " " + SQL);
 		}
-		return curso;
+		return cursos;
 	}
 
 }

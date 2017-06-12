@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ipartek.formacion.dbms.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
@@ -38,6 +39,8 @@ public class HomeController {
 
 	@Autowired
 	private CursoService cS;
+	
+	ModelAndView mav = null;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -51,9 +54,11 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
 
-		ArrayList<Curso> cursos = (ArrayList<Curso>) cS.getAll();
-		model.addAttribute("cursos", cursos);
-
+		mav = new ModelAndView("home");
+		ArrayList<Curso> cursos = (ArrayList<Curso>) cS.getAllLimit();
+		model.addAttribute("listadocursoslimit", cursos);
+		logger.info("METHOD CONTROLLER: getAllLimit()"); 
+		
 		return "home";
 	}
 

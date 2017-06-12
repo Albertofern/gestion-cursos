@@ -24,7 +24,7 @@ public interface CursoDAO extends DAOSetter {
 
 	public void delete(int codigo);
 	
-	public Curso getByNombre(String nomcurso);
+	public List<Curso> getAllLimit();
 	
 
 }

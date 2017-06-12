@@ -58,13 +58,6 @@ public class CursoValidator implements Validator{
 						"El codigo tiene que ocupar entre 3 y 50 caracteres.");
 		}
 		
-
-		if (curs.getCodigo() == Curso.CODIGO_NULO && cS.getByNombre(curs.getNomcurso()) != null) {
-			errors.rejectValue("nomcurso", "form.barrio.nombreExiste", new Object[] { curs.getNomcurso() },
-					"el barrio ya existe en la base de datos");
-
-		}
-		
 		
 	
 	}
