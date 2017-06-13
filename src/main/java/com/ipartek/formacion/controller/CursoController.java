@@ -15,9 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,8 +35,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import com.ipartek.formacion.controller.validator.CursoValidator;
 import com.ipartek.formacion.dbms.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -50,12 +48,9 @@ public class CursoController {
 	@Autowired
 	private CursoService cS;
 	
-	@Resource(name = "cursoValidator") // == @Autowired@Qualifier("cursoValidator")
-	CursoValidator validator = null;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder, Locale locale) {
-		binder.setValidator(validator);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setLenient(true);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
@@ -78,34 +73,47 @@ public class CursoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/deleteCurso/{codigo}")
-	public String delete(@PathVariable("codigo") int codigo, Model model){
+	@RequestMapping(value="/deleteCurso/{codigo}" , method = RequestMethod.GET)
+	public ModelAndView  delete(@PathVariable("codigo")int codigo, RedirectAttributes redirectMap){
 		logger.info("METHOD CONTROLLER: deleteBarrio()");
-		cS.delete(codigo);
-		return "redirect:/cursos";
+		
+		String destino = "";
+		String txt="";
+		Integer.toString(codigo);
+		destino = "redirect:/cursos";
+		mav= new ModelAndView(destino);
+		
+		try { 
+			cS.delete(codigo);
+			txt = "El curso se ha borrado correctamente.";
+		} catch (Exception e) {
+			txt = "Ha habido problemas al borrar el curso.";
+		}
+		return mav;
 	}
 	
-	@RequestMapping(value="/addCurso")
-	public String addCurso(Model model){
+	@RequestMapping(value="/addCurso", method = RequestMethod.GET)
+	public ModelAndView  addCurso(Model model){
 		logger.info("METHOD CONTROLLER: addCurso() -- PARAM:  new");
 		model.addAttribute("curso", new Curso());
-		return "curso";
+		mav= new ModelAndView("curso");
+		return mav;
 	}
 	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
-	public String saveCurso(@ModelAttribute("curso")@Valid Curso curso,BindingResult bindingResult, Model model,
-			RedirectAttributes redirectMap) throws IOException {
+	public String saveCurso(@ModelAttribute("curso")@Valid Curso curso,BindingResult bindingResult,
+			 ModelMap model ,RedirectAttributes redirectMap) throws IOException {
 		
 		logger.info("METHOD CONTROLLER: saveCurso() -- PARAMS:  " + curso.toString());
 		String destino = "";
 		String txt="";
 		if (bindingResult.hasErrors()) {
 			logger.info("METHOD CONTROLLER: saveCurso() -- ERRORS: " + bindingResult.hasErrors());
-			destino = "curso";
+			destino = "cursos";
 			txt = "Los datos de formulario contienen errores";
 		}else{
 			destino = "redirect:/cursos";
-			if(cS.getById(curso.getCodigo()) != null){
+			if(curso.getCodigo() > curso.CODIGO_NULO ){
 				try {
 					logger.info(curso.toString());
 					cS.update(curso);

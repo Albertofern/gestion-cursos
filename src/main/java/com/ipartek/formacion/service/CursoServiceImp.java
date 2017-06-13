@@ -58,4 +58,14 @@ public class CursoServiceImp implements CursoService{
 		return cursoDao.getAllLimit();
 	}
 
+	@Override
+	public Curso getByCodigo(String codcurso) {
+		return cursoDao.getByCodigo(codcurso);
+	}
+
+	@Override
+	public List<Curso> getByNombre(String nomcurso) {
+		return cursoDao.getByNombre(nomcurso);
+	}
+
 }

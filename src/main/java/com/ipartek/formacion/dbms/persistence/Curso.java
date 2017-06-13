@@ -5,6 +5,8 @@ package com.ipartek.formacion.dbms.persistence;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Size;
+
 /**
  * @author Alberto
  *
@@ -19,7 +21,9 @@ public class Curso implements Comparable<Curso>, Serializable {
 	public static final int CODIGO_NULO = -1;
 	
 	private int codigo;
+	@Size(message="Debe de tener entre {min} y {max}", min=3, max=150)
 	private String nomcurso;
+	@Size(message="Debe de tener entre {min} y {max}", min=3, max=10)
 	private String codcurso;
 	/**
 	 * 

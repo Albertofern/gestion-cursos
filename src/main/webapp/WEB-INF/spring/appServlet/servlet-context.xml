@@ -56,7 +56,5 @@
 	
 	<context:property-placeholder location="classpath*:/constantes/constantes.properties"/>
 	
-	<beans:bean id="cursoValidator"
-	class="com.ipartek.formacion.controller.validator.CursoValidator"/>
 	
 </beans:beans>

@@ -14,16 +14,14 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<!-- Logo de la empresa -->
-			<a class="navbar-brand" href="#">Logo de la empresa</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/gestioncursos/"><spring:message code="header.inicio" text="Inicio"/></a></li>
-				<li><a href="#"><spring:message code="header.quienes" text="Quienes somos"/></a></li>
-				<li><a href="#"><spring:message code="header.contacto" text="Contacto"/></a></li>
+				<li><a href="/gestioncursos/cursos"><spring:message code="header.todos" text="Todos los Curso"/></a></li>
+				<li><a href="#"></a></li>
 			</ul>
 			<!-- LO PONE A LA DERECHA --> 
 			<ul class="nav navbar-nav navbar-right">

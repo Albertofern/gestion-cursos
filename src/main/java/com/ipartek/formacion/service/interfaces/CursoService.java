@@ -25,5 +25,7 @@ public interface CursoService {
 	
 	public  List<Curso> getAllLimit();
 	
-
+	public Curso getByCodigo(String codcurso);
+	
+	public List<Curso> getByNombre(String nomcurso);
 }

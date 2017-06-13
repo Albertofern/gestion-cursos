@@ -18,7 +18,8 @@
 		<javax.validation.version>1.0.0.GA</javax.validation.version>
 		<apachetiles.version>3.0.5</apachetiles.version>
 		<cxf.version>3.1.6</cxf.version>
-		
+		<jackson.library>2.7.5</jackson.library>
+		<springfox-swagger>2.4.0</springfox-swagger>
 	</properties>
 
 	<dependencies>
@@ -213,6 +214,30 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency> 
+			<!-- JSON - Java Script Object Notation -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.11</version>
+		</dependency>
+			<!-- Jackson parsea de XML a JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.library}</version>
+		</dependency>
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger}</version>
+		</dependency>
+		<!-- Swagger UI -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-swagger}</version>
+		</dependency>
 			
 
 
