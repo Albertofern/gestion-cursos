@@ -1,4 +1,4 @@
-package com.ipartek.formacion.api.restfulservers.curso;
+package com.ipartek.formacion.api.restfulservers;
 
 
 import java.util.List;
@@ -22,7 +22,7 @@ import com.ipartek.formacion.service.interfaces.CursoService;
 
 @CrossOrigin(origins = "*", maxAge = 3600, methods = {RequestMethod.GET})
 @RestController
-@RequestMapping(value = "/api/buscador/")
+@RequestMapping(value="/api/buscador")
 public class BuscadorRestController {
 	private static final Logger logger = LoggerFactory.getLogger(BuscadorRestController.class);
 	
@@ -30,8 +30,9 @@ public class BuscadorRestController {
 	private CursoService cS;
 	
 	
-	@RequestMapping(value = "/{busqueda}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value="{busqueda}", method=RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Curso>> getByBusqueda(@PathVariable("busqueda") String busqueda){
+		
 		List<Curso> cursos = cS.getByNombre(busqueda);
 		ResponseEntity<List<Curso>> response = null;
 		if(cursos == null || cursos.isEmpty()){//204

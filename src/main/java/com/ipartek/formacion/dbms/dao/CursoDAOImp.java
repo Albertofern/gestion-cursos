@@ -133,22 +133,22 @@ public class CursoDAOImp implements CursoDAO {
 	}
 
 	@Override
-	public Curso getByCodigo(String codcurso) {	
+	public Curso getByCodigo(String codigo) {	
 		Curso curso = null;
 		final String SQL = "CALL cursogetByCodigo(?)";
 		try {
-			curso = jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[] { codcurso });
-			logger.info("METHOD DAO: getByNombre() -- PARAMS:  " + curso.toString());
+			curso = jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[] { codigo });
+			logger.info("METHOD DAO: getByCodigo() -- PARAMS:  " + curso.toString());
 		} catch (EmptyResultDataAccessException e) {
 			curso = null;
-			logger.info("NO DATA:  " + codcurso + " " + e.getMessage());
+			logger.info("NO DATA:  " + codigo + " " + e.getMessage());
 		}
 		return curso;
 	}
 	
 	@Override
 	public List<Curso> getByNombre(String nomcurso) {
-		final String SQL = "call cursogetByName(?)";
+		final String SQL = "CALL cursogetByNombre(?)";
 		List<Curso> cursos = null;
 		try{
 			cursos = jdbctemplate.query(SQL, new CursoMapper(), new Object[] { nomcurso });

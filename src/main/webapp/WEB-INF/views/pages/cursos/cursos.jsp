@@ -2,21 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 		
-	<main class="center">
+	<main class="center jumbotron">
 		<div class="container">
 			<header>
-				<h2 class="col-lg-offset-6 text-capitalize">
+				<h2 class="col-lg-offset-2 text-capitalize">
 					<spring:message code="cursos.titulo"/>
 				</h2>
 			</header>
 		</div>
+		
 		<div class="container-fluid">
-		<div id="nuevo" class ="row col-lg-offset-4 text-capitalize">
+		<div id="nuevo" class ="text-capitalize">
 			<a class="btn btn-primary" href="<c:url value="/cursos/addCurso"/>">
 				<spring:message code="cursos.nuevo"/>
 			</a>
 		</div>
-		<div id="cabecera" class="row col-lg-offset-4">
+		<div id="cabecera" class="row ">
 				<div class="col-xs-2 text-capitalize">
 					<h4>
 						<strong><spring:message code="cursos.codigo"/></strong>
@@ -33,7 +34,7 @@
 				<c:choose>
 					<c:when test="${not empty listadocursos}">
 						<c:forEach var="curso" items="${listadocursos}">
-						<div class="row col-lg-offset-4">
+						<div class="row">
 							<div class="col-xs-2">${curso.codcurso}</div>
 							<div class="col-xs-4">${curso.nomcurso}</div>
 							<div class="btn-group col-xs-2">

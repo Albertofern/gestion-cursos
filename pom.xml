@@ -17,7 +17,6 @@
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
 		<javax.validation.version>1.0.0.GA</javax.validation.version>
 		<apachetiles.version>3.0.5</apachetiles.version>
-		<cxf.version>3.1.6</cxf.version>
 		<jackson.library>2.7.5</jackson.library>
 		<springfox-swagger>2.4.0</springfox-swagger>
 	</properties>
@@ -188,25 +187,6 @@
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-jsp</artifactId>
             <version>${apachetiles.version}</version>
-        </dependency>
-        	<!-- APACHE CXF -->
-         <dependency>
-              <groupId>org.apache.cxf</groupId>
-              <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-              <version>${cxf.version}</version>
-              <scope>provided</scope>
-         </dependency>
-          <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-            <scope>provided</scope>
         </dependency>
         	<!-- AspectJ -->
 		<dependency>
