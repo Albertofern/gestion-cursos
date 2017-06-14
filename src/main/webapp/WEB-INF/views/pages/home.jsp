@@ -11,24 +11,18 @@
 				</h2>
 			</header>
 		</div>	
-		<div class="container-fluid">
-			<form class ="row">
-				<div class="col-xs-2">
-				    <button type="button" id="busca" class="btn btn-default text-capitalize">
-					    <span>
-					    	<spring:message code="const.buscar"/>
-					    </span>
-				    </button> 
-				</div>
-					<div class="col-xs-5 text-capitalize">
-				        <input type="text" id="busqueda" class="form-control">
-				    </div>
-				<div class="col-xs-5"></div>
-		    </form>
-		    <table id="resultado">
-		    	
-		    </table>
-    	</div>
+
+    	<section>
+	 	<form name="myForm" action="#" onsubmit="buscar();" >
+		 	<input type="text" name="buscar" id="buscar">
+			<input type="button" value="BUSCAR"  id="boton">
+		</form> 
+		<div id="ocultar">
+    	</div>			
+		</section>
+    	
+    	
+    	
 		<div class="container-fluid">
 		<div id="nuevo" class ="text-capitalize">
 			<a class="btn btn-primary" href="<c:url value="/cursos/addCurso"/>">

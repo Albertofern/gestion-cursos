@@ -29,4 +29,6 @@ public interface CursoDAO extends DAOSetter {
 	public Curso getByCodigo(String codigo);
 
 	public List<Curso> getByNombre(String nomcurso);
+
+	public List<Curso> getSearch(String busqueda);
 }

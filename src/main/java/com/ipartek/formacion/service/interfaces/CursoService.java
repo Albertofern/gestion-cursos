@@ -28,4 +28,6 @@ public interface CursoService {
 	public Curso getByCodigo(String codcurso);
 	
 	public List<Curso> getByNombre(String nomcurso);
+	
+	public List<Curso> getSearch(String busqueda);
 }

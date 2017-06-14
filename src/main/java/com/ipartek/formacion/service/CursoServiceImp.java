@@ -68,4 +68,9 @@ public class CursoServiceImp implements CursoService{
 		return cursoDao.getByNombre(nomcurso);
 	}
 
+	@Override
+	public List<Curso> getSearch(String busqueda) {
+		return cursoDao.getSearch(busqueda);
+	}
+
 }

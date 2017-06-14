@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2017 a las 18:50:47
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 7.1.1
+-- Tiempo de generación: 14-06-2017 a las 16:32:51
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,67 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gestioncursos`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoCreate` (IN `pnomcurso` VARCHAR(100), IN `pcodcurso` VARCHAR(50), OUT `pcodigo` INT)  NO SQL
-BEGIN
-INSERT	INTO curso(nomcurso,codcurso)
-VALUES(LOWER(pnomcurso),LOWER(pcodcurso));
-SET pcodigo = LAST_INSERT_ID();
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoDelete` (IN `pcodigo` INT)  NO SQL
-BEGIN
-
-DELETE FROM curso WHERE codigo = pcodigo;
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetAll` ()  NO SQL
-BEGIN
-SELECT c.codigo, c.nomcurso, c.codcurso
-FROM curso as c
-ORDER BY c.codigo DESC;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetAllLimit` ()  NO SQL
-BEGIN
-SELECT c.codigo, c.nomcurso, c.codcurso
-FROM curso as c
-ORDER BY codigo DESC
-LIMIT 10;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetByCodigo` (IN `pcodcurso` VARCHAR(10))  NO SQL
-BEGIN
-SELECT `codigo` as codigo, codcurso , nomcurso
-FROM `curso`
-WHERE codcurso = pcodcurso;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursogetById` (IN `pcodigo` INT)  NO SQL
-BEGIN
-SELECT  c.codigo, c.nomcurso, c.codcurso
-FROM curso as c 
-WHERE c.codigo = pcodigo;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoUpdate` (IN `pcodigo` INT, IN `pnomcurso` VARCHAR(100), IN `pcodcurso` VARCHAR(50))  NO SQL
-UPDATE curso 
-SET nomcurso = LOWER(pnomcurso),codcurso=LOWER(pcodcurso)
-WHERE codigo = pcodigo$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getByNombre` (IN `pnomcurso` VARCHAR(150))  NO SQL
-BEGIN
-SELECT `codigo` as codigo, codcurso , nomcurso
-FROM `curso`
-WHERE nomcurso = pnomcurso;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -98,7 +37,7 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`codigo`, `nomcurso`, `codcurso`) VALUES
-(1, 'programaci para pdas', 'emin3004'),
+(1, 'programac para pdas', 'emin3004'),
 (2, 'SEGURIDAD DE LA INFORMACIÓN', 'ER523'),
 (3, 'GESTIÓN Y DESARROLLO DE APLICACIONES WIRELESS', 'CI03'),
 (4, 'SMS 2003', 'CI04'),
@@ -1563,7 +1502,7 @@ INSERT INTO `curso` (`codigo`, `nomcurso`, `codcurso`) VALUES
 (1650, 'Seguridad de la información - Online', 'ERK102'),
 (1651, 'Firma y facturación electrónica - Online', 'ERIU715'),
 (1652, 'Symfony', ''),
-(1653, 'Uso de aplicaciones Google: Doc\'s, Calc, Forms, Dr', 'CI161'),
+(1653, 'Uso de aplicaciones Google: Doc''s, Calc, Forms, Dr', 'CI161'),
 (1654, 'InkScape - Tratamiento de Gráficos Vectoriales', 'CI162'),
 (1655, 'IFCD0210 DESARROLLO DE APLIC CON TECN WEB', 'IFCD0210_FIC'),
 (1656, 'Programación con JAVA/JEE - Gr5', 'CI94'),
@@ -1615,7 +1554,7 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de la tabla `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT COMMENT 'el campo clave de la tabla. Es auto generado.', AUTO_INCREMENT=1692;
+  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT COMMENT 'el campo clave de la tabla. Es auto generado.', AUTO_INCREMENT=1686;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

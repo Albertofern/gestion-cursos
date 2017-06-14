@@ -160,4 +160,19 @@ public class CursoDAOImp implements CursoDAO {
 		return cursos;
 	}
 
+	@Override
+	public List<Curso> getSearch(String busqueda) {
+		final String SQL = "CALL cursogetSearch(?)";
+		List<Curso> cursos = null;
+		try{	
+			cursos = jdbctemplate.query(SQL, new Object[]{busqueda},new CursoMapper());
+			logger.info("METHOD DAO: getSearch() -- PARAMS:  " + cursos.toString());
+			logger.info(" Se ha recuperado los cursos con criterio de busqueda %" + busqueda + "%");
+		}catch(EmptyResultDataAccessException e){
+			cursos = null;
+			logger.info("NO DATA:  " + busqueda + " " + e.getMessage());
+		}
+	return cursos;
+	}
+
 }
